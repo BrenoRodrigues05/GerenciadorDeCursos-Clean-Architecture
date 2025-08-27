@@ -1,7 +1,10 @@
-﻿using GerenciadorCursos.Application.Handlers;
+﻿using GerenciadorCursos.Application.DTOs;
+using GerenciadorCursos.Application.Handlers;
+using GerenciadorCursos.Application.Mappings;
+using GerenciadorCursos.Domain.Entities;
 using GerenciadorCursos.Domain.Interfaces;
-using GerenciadorCursos.Infrastructure.Repositories;
 using GerenciadorCursos.Infrastructure.Context;
+using GerenciadorCursos.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -27,6 +30,10 @@ namespace GerenciadorCursos.Infrastructure.Context
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<ICursoRepository, CursoRepository>();
             services.AddScoped<IInscricaoRepository, InscricaoRepository>();
+
+            services.AddScoped<IDTOMapper<CursoCreateDTO, Curso>, CursoMapper>();
+            services.AddScoped<IDTOMapper<InscricaoCreateDTO, Inscricao>, InscricaoMapper>();
+            services.AddScoped<IDTOMapper<AlunoCreateDTO, Aluno>, AlunoMapper>();
 
             return services;
         }

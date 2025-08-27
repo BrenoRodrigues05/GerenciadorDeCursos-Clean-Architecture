@@ -14,9 +14,12 @@ namespace GerenciadorCursos.Application.Handlers
         // Implementação do handler para cadastrar aluno em curso
 
         private readonly IUnitOfWork _unitOfWork;
-        public CadastrarAlunoEmCursoHandler(IUnitOfWork unitOfWork)
+        private readonly IDTOMapper<InscricaoCreateDTO, Inscricao> _inscricaoMapper;
+        public CadastrarAlunoEmCursoHandler(IUnitOfWork unitOfWork, IDTOMapper<InscricaoCreateDTO, 
+            Inscricao> inscricaoMapper)
         {
             _unitOfWork = unitOfWork;
+            _inscricaoMapper = inscricaoMapper;
         }
         public async Task<Inscricao> HandleAsync(InscricaoCreateDTO dto)
         {
@@ -32,7 +35,8 @@ namespace GerenciadorCursos.Application.Handlers
             if (jaInscrito != null)
                 throw new Exception("Aluno já está inscrito neste curso.");
 
-            var inscricao = new Inscricao(dto.AlunoId, dto.CursoId);
+            var inscricao = _inscricaoMapper.ToEntity(dto);
+
             await _unitOfWork.Inscricoes.AdicionarAsync(inscricao);
             await _unitOfWork.CommitAsync();
 

@@ -14,10 +14,11 @@ namespace GerenciadorCursos.Application.Handlers
         // Implementação do handler para criar um curso
 
        private readonly IUnitOfWork _unitOfWork;
-
-        public CriarCursoHandler(IUnitOfWork unitOfWork)
+        private readonly IDTOMapper<CursoCreateDTO, Curso> _cursoMapper;
+        public CriarCursoHandler(IUnitOfWork unitOfWork, IDTOMapper<CursoCreateDTO, Curso> cursoMapper)
         {
             _unitOfWork = unitOfWork;
+            _cursoMapper = cursoMapper;
         }
 
         public async Task<Curso> HandleAsync(CursoCreateDTO dto)
@@ -25,7 +26,7 @@ namespace GerenciadorCursos.Application.Handlers
             if (await _unitOfWork.Cursos.ExisteCursoComNomeAsync(dto.Nome))
                 throw new System.Exception("Já existe um curso com este nome.");
 
-            var curso = new Curso(dto.Nome, dto.CargaHoraria, dto.Descricao);
+            var curso = _cursoMapper.ToEntity(dto);
 
             await _unitOfWork.Cursos.AdicionarAsync(curso);
             await _unitOfWork.CommitAsync(); // salva a transação

@@ -13,11 +13,13 @@ namespace GerenciadorCursos.API.Controllers
     {
         private readonly CriarCursoHandler _criarCursoHandler;
         private readonly IUnitOfWork _unitOfWork;
-
+       
         public CursosController(CriarCursoHandler criarCursoHandler, IUnitOfWork unitOfWork)
+            
         {
             _criarCursoHandler = criarCursoHandler;
             _unitOfWork = unitOfWork;
+           
         }
 
         // Endpoint para criar um curso

@@ -14,10 +14,11 @@ namespace GerenciadorCursos.Application.Handlers
         // Implamentação de handler para criar perfil de aluno
 
         private readonly IUnitOfWork _unitOfWork;
-
-        public CriarAlunoHandler(IUnitOfWork unitOfWork)
+        private readonly IDTOMapper<AlunoCreateDTO, Aluno> _alunoMapper;
+        public CriarAlunoHandler(IUnitOfWork unitOfWork, IDTOMapper<AlunoCreateDTO,Aluno> dTOMapper) 
         {
             _unitOfWork = unitOfWork;
+            _alunoMapper = dTOMapper;
         }
 
         public async Task<Aluno> HandleAsync(AlunoCreateDTO dto)
@@ -25,7 +26,7 @@ namespace GerenciadorCursos.Application.Handlers
             if (await _unitOfWork.Alunos.ExisteAlunoComCpfAsync(dto.Cpf))
 
                 throw new Exception("Já existe um aluno com este CPF.");
-            var aluno = new Domain.Entities.Aluno(dto.Cpf, dto.Nome, dto.Email, dto.DataNascimento);
+            var aluno = _alunoMapper.ToEntity(dto);
 
             await _unitOfWork.Alunos.AdicionarAsync(aluno);
 

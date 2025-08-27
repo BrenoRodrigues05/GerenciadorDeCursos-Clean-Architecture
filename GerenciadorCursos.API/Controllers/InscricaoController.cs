@@ -1,5 +1,6 @@
 ﻿using GerenciadorCursos.Application.DTOs;
 using GerenciadorCursos.Application.Handlers;
+using GerenciadorCursos.Domain.Entities;
 using GerenciadorCursos.Domain.Interfaces;
 using GerenciadorCursos.Infrastructure.Context;
 using Microsoft.AspNetCore.Http;
@@ -15,11 +16,14 @@ namespace GerenciadorCursos.API.Controllers
 
         private readonly CadastrarAlunoEmCursoHandler cadastrarAlunoEmCursoHandler;
 
+       
+
         public InscricaoController(IUnitOfWork unitOfWork, CadastrarAlunoEmCursoHandler
             cadastrarAlunoEmCursoHandler)
         {
             _unitOfWork = unitOfWork;
             this.cadastrarAlunoEmCursoHandler = cadastrarAlunoEmCursoHandler;
+           
         }
 
         [HttpPost]

@@ -16,10 +16,12 @@ namespace GerenciadorCursos.API.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public AlunosController(IUnitOfWork unitOfWork, CriarAlunoHandler criarAlunoHandler)
+        public AlunosController(IUnitOfWork unitOfWork, CriarAlunoHandler criarAlunoHandler
+            )
         {
             _unitOfWork = unitOfWork;
             _criarAlunoHandler = criarAlunoHandler;
+           
         }
 
         // Implementar endpoints para gerenciar alunos
