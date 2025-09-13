@@ -1,4 +1,5 @@
 using GerenciadorCursos.Application.Handlers;
+using GerenciadorCursos.CrossCutting.Extensions;
 using GerenciadorCursos.Domain.Interfaces;
 using GerenciadorCursos.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.ConfigureExceptionHandler();
 }
 
 app.UseHttpsRedirection();
