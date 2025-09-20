@@ -1,5 +1,7 @@
 ﻿using GerenciadorCursos.Domain.Entities;
 using GerenciadorCursos.Infrastructure.EntitiesConfigurations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorCursos.Infrastructure.Context
 {
-    public class GerenciadorCursosContext : DbContext
+    public class GerenciadorCursosContext : IdentityDbContext <IdentityUser>
     {
         public GerenciadorCursosContext(DbContextOptions<GerenciadorCursosContext> options) : base(options)
         {

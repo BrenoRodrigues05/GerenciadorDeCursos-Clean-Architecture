@@ -1,10 +1,13 @@
 ﻿using GerenciadorCursos.Application.DTOs;
 using GerenciadorCursos.Application.Handlers;
 using GerenciadorCursos.Application.Mappings;
+using GerenciadorCursos.Application.Services;
 using GerenciadorCursos.Domain.Entities;
 using GerenciadorCursos.Domain.Interfaces;
 using GerenciadorCursos.Infrastructure.Context;
 using GerenciadorCursos.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -34,6 +37,8 @@ namespace GerenciadorCursos.Infrastructure.Context
             services.AddScoped<IDTOMapper<CursoCreateDTO, Curso>, CursoMapper>();
             services.AddScoped<IDTOMapper<InscricaoCreateDTO, Inscricao>, InscricaoMapper>();
             services.AddScoped<IDTOMapper<AlunoCreateDTO, Aluno>, AlunoMapper>();
+
+            services.AddScoped<IAuth, AuthService>();
 
             return services;
         }
