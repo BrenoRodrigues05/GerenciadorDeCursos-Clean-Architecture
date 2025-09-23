@@ -2,6 +2,8 @@
 using GerenciadorCursos.Application.Handlers;
 using GerenciadorCursos.Domain.Entities;
 using GerenciadorCursos.Domain.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -9,6 +11,7 @@ namespace GerenciadorCursos.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AlunosController : ControllerBase
     {
         private readonly CriarAlunoHandler _criarAlunoHandler;
